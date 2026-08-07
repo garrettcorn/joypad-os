@@ -134,6 +134,8 @@ CONSOLE_controller_fisherprice_v1 := joypad_controller_fisherprice_v1
 CONSOLE_controller_fisherprice_v2 := joypad_controller_fisherprice_v2
 CONSOLE_controller_alpakka := joypad_controller_alpakka
 CONSOLE_controller_macropad := joypad_controller_macropad
+CONSOLE_controller_custom_rp2040zero := joypad_controller_custom_rp2040zero
+CONSOLE_controller_custom_pico := joypad_controller_custom_pico
 CONSOLE_bt2gc := joypad_bt2gc
 CONSOLE_bt2wiiext := joypad_bt2wiiext
 CONSOLE_controller_btusb := joypad_controller_btusb
@@ -238,6 +240,8 @@ APP_controller_fisherprice_v1_kb2040 := kb2040 controller_fisherprice_v1 control
 APP_controller_fisherprice_v2_kb2040 := kb2040 controller_fisherprice_v2 controller_fisherprice_v2_kb2040 GPIO/ADC USB
 APP_controller_alpakka_pico := pico controller_alpakka controller_alpakka_pico GPIO/I2C USB
 APP_controller_macropad := macropad controller_macropad controller_macropad GPIO USB
+APP_controller_custom_rp2040zero := rp2040zero controller_custom_rp2040zero controller_custom_rp2040zero GPIO USB
+APP_controller_custom_pico := pico controller_custom_pico controller_custom_pico GPIO USB
 APP_controller_btusb_fisherprice_v1_kb2040 := kb2040 controller_btusb_fisherprice_v1 controller_btusb_fisherprice_v1_kb2040 GPIO USB
 APP_controller_btusb_fisherprice_v2_kb2040 := kb2040 controller_btusb_fisherprice_v2 controller_btusb_fisherprice_v2_kb2040 GPIO/ADC USB
 APP_controller_btusb_alpakka_pico := pico controller_btusb_alpakka controller_btusb_alpakka_pico GPIO/I2C USB
@@ -250,7 +254,7 @@ APP_controller_btusb_feather_rp2040_usb_host := feather_usbhost controller_btusb
 
 # All apps (note: controller_macropad not included - build explicitly with 'make controller_macropad')
 # Note: usb2loopy_kb2040, snes23do_rp2040zero excluded until more mature
-APPS := usb2pce_kb2040 usb2gc_kb2040 usb2gc_rp2040zero usb2nuon_kb2040 usb2n64_kb2040 usb2dc_kb2040 usb2dc_rp2040zero usb2neogeo_kb2040 usb2neogeo_pico usb2neogeo_rp2040zero usb2neogeo_retrofrog n642dc_kb2040 n642dc_pico2_w n642nuon_pico usb23do_rp2040zero usb2uart_kb2040 usb2usb_pico usb2usb_pico_w usb2usb_pico2_w usb2usb_feather_rp2040 usb2usb_feather_rp2040_usb_host usb2usb_feather_rp2040_max3421 usb2usb_feather_rp2040_usb_host_max3421 usb2usb_rp2040zero usb2usb_rp2350usba bt2usb_pico_w bt2usb_pico2_w btusb2usb_pico_w btusb2usb_pico2_w usb2ble_pico_w usb2ble_pico2_w bt2nuon_pico_w bt2nuon_pico2_w bt2n64_pico_w bt2n64_pico2_w snes2usb_kb2040 n642usb_kb2040 gc2usb_kb2040 gc2usb_rp2040zero gc2usb_feather_usbhost gc2eth_rp2040_eth gc2eth_feather_usbhost nes2usb_kb2040 nes2usb_pico_w pce2usb_kb2040 pce2usb_pico pce2usb_pico_w jag2usb_pico_w controller_fisherprice_v1_kb2040 controller_fisherprice_v2_kb2040 controller_alpakka_pico usb2ami_rp2040zero usb2ami_xiao
+APPS := usb2pce_kb2040 usb2gc_kb2040 usb2gc_rp2040zero usb2nuon_kb2040 usb2n64_kb2040 usb2dc_kb2040 usb2dc_rp2040zero usb2neogeo_kb2040 usb2neogeo_pico usb2neogeo_rp2040zero usb2neogeo_retrofrog n642dc_kb2040 n642dc_pico2_w n642nuon_pico usb23do_rp2040zero usb2uart_kb2040 usb2usb_pico usb2usb_pico_w usb2usb_pico2_w usb2usb_feather_rp2040 usb2usb_feather_rp2040_usb_host usb2usb_feather_rp2040_max3421 usb2usb_feather_rp2040_usb_host_max3421 usb2usb_rp2040zero usb2usb_rp2350usba bt2usb_pico_w bt2usb_pico2_w btusb2usb_pico_w btusb2usb_pico2_w usb2ble_pico_w usb2ble_pico2_w bt2nuon_pico_w bt2nuon_pico2_w bt2n64_pico_w bt2n64_pico2_w snes2usb_kb2040 n642usb_kb2040 gc2usb_kb2040 gc2usb_rp2040zero gc2usb_feather_usbhost gc2eth_rp2040_eth gc2eth_feather_usbhost nes2usb_kb2040 nes2usb_pico_w pce2usb_kb2040 pce2usb_pico pce2usb_pico_w jag2usb_pico_w controller_fisherprice_v1_kb2040 controller_fisherprice_v2_kb2040 controller_alpakka_pico controller_custom_rp2040zero controller_custom_pico usb2ami_rp2040zero usb2ami_xiao
 
 # Stable apps for release
 # Note: usb2loopy_kb2040, snes23do_rp2040zero excluded until more mature
@@ -356,6 +360,8 @@ help:
 	@echo "  make controller_fisherprice_v2_kb2040 - Fisher Price V2 (analog+shoulders) -> USB HID (KB2040)"
 	@echo "  make controller_alpakka_pico - GPIO/I2C -> USB HID (Pico)"
 	@echo "  make controller_macropad - 12 keys -> USB HID (MacroPad RP2040)"
+	@echo "  make controller_custom_rp2040zero - Hand-wired GPIO pad -> USB HID (RP2040-Zero, pins set at runtime)"
+	@echo "  make controller_custom_pico - Hand-wired GPIO pad -> USB HID (Pico, pins set at runtime)"
 	@echo "  make controller_btusb_pico_w - GPIO+JoyWing -> BLE+USB HID (Pico W)"
 	@echo "  make controller_btusb_rp2040_abb - GPIO+USB Host -> USB HID (ABB Passthrough)"
 
@@ -1174,6 +1180,14 @@ controller_alpakka_pico:
 controller_macropad:
 	$(call build_app,controller_macropad)
 
+.PHONY: controller_custom_rp2040zero
+controller_custom_rp2040zero:
+	$(call build_app,controller_custom_rp2040zero)
+
+.PHONY: controller_custom_pico
+controller_custom_pico:
+	$(call build_app,controller_custom_pico)
+
 .PHONY: controller_btusb_fisherprice_v1_kb2040
 controller_btusb_fisherprice_v1_kb2040:
 	$(call build_app,controller_btusb_fisherprice_v1_kb2040)
@@ -1635,6 +1649,14 @@ flash-controller_alpakka_pico:
 .PHONY: flash-controller_macropad
 flash-controller_macropad:
 	@$(MAKE) --no-print-directory _flash_app APP_NAME=controller_macropad
+
+.PHONY: flash-controller_custom_rp2040zero
+flash-controller_custom_rp2040zero:
+	@$(MAKE) --no-print-directory _flash_app APP_NAME=controller_custom_rp2040zero
+
+.PHONY: flash-controller_custom_pico
+flash-controller_custom_pico:
+	@$(MAKE) --no-print-directory _flash_app APP_NAME=controller_custom_pico
 
 .PHONY: flash-controller_btusb_pico_w
 flash-controller_btusb_pico_w:
