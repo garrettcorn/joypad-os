@@ -136,6 +136,8 @@ CONSOLE_controller_alpakka := joypad_controller_alpakka
 CONSOLE_controller_macropad := joypad_controller_macropad
 CONSOLE_bt2gc := joypad_bt2gc
 CONSOLE_bt2wiiext := joypad_bt2wiiext
+CONSOLE_usb2wiiext := joypad_usb2wiiext
+CONSOLE_usb2wiiext_pico := joypad_usb2wiiext_pico
 CONSOLE_controller_btusb := joypad_controller_btusb
 CONSOLE_controller_btusb_rp2040_abb := joypad_controller_btusb_rp2040_abb
 CONSOLE_controller_btusb_feather_rp2040 := joypad_controller_btusb_feather_rp2040
@@ -204,6 +206,8 @@ APP_bt2n64_pico2_w := pico2_w bt2n64 bt2n64_pico2_w Bluetooth N64
 APP_bt2gc_pico_w := pico_w bt2gc bt2gc_pico_w Bluetooth GameCube
 APP_bt2gc_pico2_w := pico2_w bt2gc bt2gc_pico2_w Bluetooth GameCube
 APP_bt2wiiext_pico_w := pico_w bt2wiiext bt2wiiext_pico_w Bluetooth Wii extension
+APP_usb2wiiext_kb2040 := kb2040 usb2wiiext usb2wiiext_kb2040 USB Wii extension
+APP_usb2wiiext_pico := pico usb2wiiext_pico usb2wiiext_pico USB Wii extension
 APP_btusb2usb_pico_w := pico_w btusb2usb btusb2usb_pico_w USB/BT+CYW43 USB
 APP_btusb2usb_pico2_w := pico2_w btusb2usb btusb2usb_pico2_w USB/BT+CYW43 USB
 APP_usb2ble_pico_w := pico_w usb2ble usb2ble_pico_w USB BLE
@@ -250,7 +254,7 @@ APP_controller_btusb_feather_rp2040_usb_host := feather_usbhost controller_btusb
 
 # All apps (note: controller_macropad not included - build explicitly with 'make controller_macropad')
 # Note: usb2loopy_kb2040, snes23do_rp2040zero excluded until more mature
-APPS := usb2pce_kb2040 usb2gc_kb2040 usb2gc_rp2040zero usb2nuon_kb2040 usb2n64_kb2040 usb2dc_kb2040 usb2dc_rp2040zero usb2neogeo_kb2040 usb2neogeo_pico usb2neogeo_rp2040zero usb2neogeo_retrofrog n642dc_kb2040 n642dc_pico2_w n642nuon_pico usb23do_rp2040zero usb2uart_kb2040 usb2usb_pico usb2usb_pico_w usb2usb_pico2_w usb2usb_feather_rp2040 usb2usb_feather_rp2040_usb_host usb2usb_feather_rp2040_max3421 usb2usb_feather_rp2040_usb_host_max3421 usb2usb_rp2040zero usb2usb_rp2350usba bt2usb_pico_w bt2usb_pico2_w btusb2usb_pico_w btusb2usb_pico2_w usb2ble_pico_w usb2ble_pico2_w bt2nuon_pico_w bt2nuon_pico2_w bt2n64_pico_w bt2n64_pico2_w snes2usb_kb2040 n642usb_kb2040 gc2usb_kb2040 gc2usb_rp2040zero gc2usb_feather_usbhost gc2eth_rp2040_eth gc2eth_feather_usbhost nes2usb_kb2040 nes2usb_pico_w pce2usb_kb2040 pce2usb_pico pce2usb_pico_w jag2usb_pico_w controller_fisherprice_v1_kb2040 controller_fisherprice_v2_kb2040 controller_alpakka_pico usb2ami_rp2040zero usb2ami_xiao
+APPS := usb2pce_kb2040 usb2gc_kb2040 usb2gc_rp2040zero usb2nuon_kb2040 usb2n64_kb2040 usb2dc_kb2040 usb2dc_rp2040zero usb2neogeo_kb2040 usb2neogeo_pico usb2neogeo_rp2040zero usb2neogeo_retrofrog n642dc_kb2040 n642dc_pico2_w n642nuon_pico usb23do_rp2040zero usb2uart_kb2040 usb2usb_pico usb2usb_pico_w usb2usb_pico2_w usb2usb_feather_rp2040 usb2usb_feather_rp2040_usb_host usb2usb_feather_rp2040_max3421 usb2usb_feather_rp2040_usb_host_max3421 usb2usb_rp2040zero usb2usb_rp2350usba bt2usb_pico_w bt2usb_pico2_w btusb2usb_pico_w btusb2usb_pico2_w usb2ble_pico_w usb2ble_pico2_w bt2nuon_pico_w bt2nuon_pico2_w bt2n64_pico_w bt2n64_pico2_w snes2usb_kb2040 n642usb_kb2040 gc2usb_kb2040 gc2usb_rp2040zero gc2usb_feather_usbhost gc2eth_rp2040_eth gc2eth_feather_usbhost nes2usb_kb2040 nes2usb_pico_w pce2usb_kb2040 pce2usb_pico pce2usb_pico_w jag2usb_pico_w controller_fisherprice_v1_kb2040 controller_fisherprice_v2_kb2040 controller_alpakka_pico usb2ami_rp2040zero usb2ami_xiao usb2wiiext_kb2040 usb2wiiext_pico
 
 # Stable apps for release
 # Note: usb2loopy_kb2040, snes23do_rp2040zero excluded until more mature
@@ -708,6 +712,14 @@ bt2n64_pico2_w:
 .PHONY: bt2wiiext_pico_w
 bt2wiiext_pico_w:
 	$(call build_app,bt2wiiext_pico_w)
+
+.PHONY: usb2wiiext_kb2040
+usb2wiiext_kb2040:
+	$(call build_app,usb2wiiext_kb2040)
+
+.PHONY: usb2wiiext_pico
+usb2wiiext_pico:
+	$(call build_app,usb2wiiext_pico)
 
 .PHONY: bt2gc_pico_w
 bt2gc_pico_w:
